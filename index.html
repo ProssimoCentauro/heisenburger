@@ -5,32 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heisenburger</title>
   <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    /* Imposta margini e padding a zero */
+    * {
       margin: 0;
-      background-color: #f4f4f4;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      box-sizing: border-box;
     }
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
+
+    /* Sfondo dell'intera pagina */
+    body {
+      height: 100vh; /* Altezza del viewport */
+      background-image: url("heisenburger.png"); /* Sostituisci con il nome della tua immagine */
+      background-size: cover; /* Adatta l'immagine allo schermo intero */
+      background-position: center; /* Centra l'immagine */
+      background-repeat: no-repeat; /* Evita ripetizioni */
+      background-color: black; /* Colore di fallback */
+      display: flex;
+      justify-content: center; /* Centra il contenuto orizzontalmente */
+      align-items: center; /* Centra il contenuto verticalmente */
+    }
+
+    /* Stile del pulsante */
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid white;
+      border-radius: 5px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.7);
+      color: black;
+      border-color: black;
     }
   </style>
 </head>
 <body>
-  <!-- Immagine -->
-  <img src="heisenburger.png" alt="Heisenburger">
+  <!-- Pulsante per avviare l'audio -->
+  <button id="startButton">Avvia Audio</button>
 
-  <!-- Audio -->
-  <audio autoplay loop>
+  <!-- Elemento audio -->
+  <audio id="audio" loop>
     <source src="heisenburger.mp3" type="audio/mpeg">
     Il tuo browser non supporta l'elemento audio.
   </audio>
+
+  <script>
+    // Riferimenti agli elementi
+    const audio = document.getElementById("audio");
+    const button = document.getElementById("startButton");
+
+    // Aggiungi un evento di clic al pulsante
+    button.addEventListener("click", () => {
+      audio.play().then(() => {
+        console.log("Audio avviato con successo.");
+      }).catch(error => {
+        console.error("Errore durante l'avvio dell'audio:", error);
+      });
+
+      // Nascondi il pulsante dopo il clic
+      button.style.display = "none";
+    });
+  </script>
 </body>
 </html>
 
